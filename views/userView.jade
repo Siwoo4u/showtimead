@@ -1,0 +1,69 @@
+doctype html
+doctype
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    link(href='../css/default.css' rel='stylesheet' tyle='text/css')
+    link(href='../css/main.css' rel='stylesheet' tyle='text/css')
+    link(href='../css/bootstrap.min.css' rel='stylesheet' tyle='text/css')
+    title= data.u_name
+  body
+    div#header
+      div.row
+        div.col-md-12 SHOW:TIME 관리자
+    div#wrap.container(style='padding-left:0')
+      div.row
+        div.col-md-2.left_backg(style="padding:0")
+          include ./menu.jade
+        div.col-md-10
+          h1 회원정보
+          div.row.row-box(style='margin-left:5px')
+            div.col-md-2.user-row-title.p5 이름
+            div.col-md-2.p5= data.u_name
+            div.col-md-2.p5.user-row-title 이메일
+            div.col-md-3.p5= data.u_email
+          div.row.row-box(style='margin-left:5px')
+            div.col-md-2.p5.user-row-title 연락처
+            div.col-md-2.p5= data.u_tel
+            div.col-md-2.p5.user-row-title 나이
+            div.col-md-2.p5= year-data.u_birth
+            div.col-md-2.p5.user-row-title 성별
+            -if(data.u_sex==1)
+              div.col-md-2.p5 남
+            -else
+              div.col-md-2.p5 여
+          div.row.row-box(style='margin-left:5px')
+            div.col-md-12.p5.user-row-title 예약내역 #{order.length} 건
+          div.row.row-box(style='margin-left:5px')
+            div.col-md-2.p5.order-title 요청날짜
+            div.col-md-2.p5.order-title 샵이름
+            div.col-md-2.p5.order-title 예약날짜
+            div.col-md-2.p5.order-title 메뉴
+            div.col-md-2.p5.order-title 금액
+            div.col-md-2.p5.order-title 상태
+          -if(order.length==0)
+            div.row(style="margin-left:5px;")
+              div.col-md-12(style='text-align:center;padding-top:20px') 예약 내역이 없습니다.
+          each orders in order
+            div.row(style="margin-left:5px;border-bottom:1px dashed #BDBDBD")
+              div.col-md-2.p5= orders.o_date
+              div.col-md-2.p5= orders.shop_name
+              div.col-md-2.p5= orders.o_time
+              div.col-md-2.p5= orders.m_name
+              div.col-md-2.p5= orders.o_pay +'원'
+              -if(orders.o_type=='N')
+                div.col-md-2.p5 예약요청
+              -else if(orders.o_type=='B')
+                div.col-md-2.p5 사용자취소
+              -else if(orders.o_type=='C')
+                div.col-md-2.p5 업체취소
+              -else if(orders.o_type=='Y')
+                div.col-md-2.p5 예약완료
+              -else
+                div.col-md-2.p5 결제대기
+          div.row(style="margin-left:5px;")
+            button.btn-back(onclick='history.back();') 뒤로가기
+    div#footer						
+    script(src='../js/jquery-3.3.1.min.js')
+    script(src='../js/userView.js')
+    script(src='/js/bootstrap.min.js')

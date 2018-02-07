@@ -1,0 +1,93 @@
+doctype html
+html
+	head
+		meta(charset='utf-8')
+		link(href='../css/default.css' rel='stylesheet' tyle='text/css')
+		link(href='../css/main.css' rel='stylesheet' tyle='text/css')
+		link(href='../css/bootstrap.min.css' rel='stylesheet' tyle='text/css')
+		
+		
+		title SHOW:TIME
+		
+	body
+		div#header
+			div.row
+				div.col-md-12 SHOW:TIME 관리자
+		div#wrap.container(style='padding-left:0')
+			div.row
+				div.col-md-2.left_backg(style="padding:0")
+					include ./menu.jade
+				div.col-md-10
+					h1 회원 리스트
+					div#title
+						span(style='width:30px;') 순번
+						span(style='width:200px;') 이메일
+						span(style='width:200px;') 이름
+						span 성별
+						span 생년월일
+						span 등록날짜
+					- if (userList.length > 0){
+						ul
+							each val,index in userList
+								li.list-row(rel=val.u_idx)
+									span.list-item(style='width:30px;')= userList.length-index
+									span.list-item.s_title= val.u_email
+									span.list-item.s_title= val.u_name
+									- if(val.u_sex==1){
+									span.list-item 남자
+									- }else{
+									span.list-item 여자
+									-}
+									span.list-item= val.u_birth
+									span.list-item= val.u_insert_dt
+									-
+									span.list-hide= val.u_idx
+					- }else{
+						p.nothing 회원 데이터가 없습니다.
+					- }
+					div
+						select#select_search(style='height:30px;')
+							option(value='name') 이름
+							option(value='email') 이메일
+						input#search(type='text' onkeydown='onKeyDown();')
+						button.btn-search(onclick='search();') 검색
+					div.mt20
+						ul
+							each val in pagination.range == '' ? [1] : pagination.range
+								- if(val==pagination.current){
+									a(href="#{pagination.prelink}/#{val}")
+										li.pageOn= val
+								- } else {
+									a(href="#{pagination.prelink}/#{val}")
+										li.page= val
+								-}
+						
+		<!-modal-->
+		div#modal.modal.fade(tabindenx='-1' role='dialog')
+			div.modal-dialog modal-dialog-centered(role='document')
+				div.modal-content
+					div.modal-header
+						h5#modal-title.modal-title Modal title
+						button.close(data-dismiss='modal' aria-label='Close')
+							span(aria-hidden='true')
+					div.modal-body
+						div.label-wait 인증대기
+						div#btn-pay.display-none.label-pay 결제사용
+						div#modalbodytop
+						div#modalbodybottom
+						input(type='hidden' id='modal_id' val='')
+					div.modal-footer
+						button.btn.btn-secondary(data-dismiss='modal') 닫기
+						button#btn-ok.btn.btn-primary 인증하기
+		<!-modal end-->										
+		
+		
+		
+		
+		
+		div#footer						
+		script(src='../js/jquery-3.3.1.min.js')
+		script(src='../js/bootstrap.min.js' )
+		script(src='../js/userList.js' )						
+		
+			

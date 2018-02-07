@@ -1,0 +1,23 @@
+{
+  "name": "showtime_admin",
+  "version": "1.0.0",
+  "description": "showtime web for admin",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "bootstrap": "^4.0.0",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.2",
+    "express-custom-mime-types": "^1.0.4",
+    "jade": "^1.11.0",
+    "pagination": "^0.4.4",
+    "pg": "^7.4.1",
+    "supervisor": "^0.12.0",
+    "underscore": "^1.8.3"
+  }
+}

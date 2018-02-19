@@ -1,0 +1,69 @@
+doctype html
+html
+	head
+		meta(charset='utf-8')
+		link(href='../css/default.css' rel='stylesheet' tyle='text/css')
+		link(href='../css/main.css' rel='stylesheet' tyle='text/css')
+		link(href='../css/bootstrap.min.css' rel='stylesheet' tyle='text/css')
+		link(href='//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css' rel='stylesheet' tyle='text/css')
+		
+		title SHOW:TIME
+		
+	body
+		div#header
+			div.row
+				div.col-md-12 SHOW:TIME 관리자
+		div#wrap.container(style='padding-left:0')
+			div.row
+				div.col-md-2.left_backg(style="padding:0")
+					include ./menu.jade
+				div.col-md-10
+					h1 로컬추천 등록
+					div.row
+						div.col-md-5
+							img.img-responsive(src='http://localhost:8080#{data.shop_img1}' style='width:100%;')
+						div.col-md-7
+							span.local-title.block= data.shop_name
+							span.local-sub.block= data.shop_tel
+							span.local-sub.block= data.shop_addr
+					div.row(style='background:rgb(29, 91, 80);')
+						div.col-md-12
+							h2(style='color:#fff;') 등록기간
+					div.row(style='margin-top:10px;height:50px;')
+						div.col-md-12
+							span.fontb 시작날짜
+							input(id='start' type='text' style="border:1px solid black;height:30px;" value="#{d_data.ad_start}")
+							span.fontb 끝 날짜
+							input(id='end' type='text' style="border:1px solid black;height:30px;" value="#{d_data.ad_end}")
+					div.row(style='background:rgb(29, 91, 80);')
+						div.col-md-12
+							h2(style='color:#fff;') 검색 키워드
+					div.row
+						div.col-md-12
+							input.keyword-bar(type='text' placeholder='입력 후 엔터' onkeydown='onKeyDown();' id='tag_input')
+							input(type='hidden' id='tag_values' value="#{d_data.ad_keyword}")
+							input(type='hidden' id='shopid' value='#{data.shop_id}')
+							div#keyword
+					div.row
+						button.btn-local(style='margin:10px;' onclick='adact();') 등록
+					
+		
+		
+		
+		
+		div#footer						
+		script(src='../js/jquery-3.3.1.min.js')
+		script(src='../js/bootstrap.min.js' )
+		script(src='../js/local.js')
+		script(src='https://code.jquery.com/ui/1.12.1/jquery-ui.js' )
+		script.
+			$( function() {
+				$( "#start" ).datepicker({
+				    dateFormat: "yy-mm-dd",
+				});
+
+				$( "#end" ).datepicker({
+				    dateFormat: "yy-mm-dd"
+				});
+			});					
+			

@@ -45,7 +45,32 @@ module.exports = function(conn){
         }
       });
     });
+    // 로컬추천 등록
+    router.post('/localAct', (req,res)=>{
 
+      var id = req.body.id;
+      var start = req.body.start;
+      var end = req.body.end;
+      var keyword = req.body.keyword;
+      conn.query(sql.selectAD(),[id],(err,result)=>{
+
+        conn.query(sql.updateAD(result.rowCount),[id,start,end,keyword],(err,result)=>{
+          if(err){
+            console.log(err);
+            res.send('err');
+          }else{
+            res.send(result);
+          }
+        });
+      });
+    });
+    // 로컬추천 리스트
+    router.get('/localList', (req,res)=>{
+
+      conn.query(sql.selectLocalList(),(err,result)=>{
+        res.render('localList',{list:result.rows});
+      });
+    });
     //view - 타임샵 전체
     router.get('/shopListAll/:page', (req,res)=>{
       var page = req.params.page;
@@ -113,12 +138,23 @@ module.exports = function(conn){
             var year = dt.getFullYear();
             res.render('userView',{data:u_data,order:result.rows,year:year});
         });
-
-
-
       });
-
     });
 
+    router.get('/shoplocal/:id',(req,res)=>{
+      conn.query(sql.selectShopDetail(),[req.params.id],(err,result)=>{
+        if(err){
+          console.log(err);
+        }
+        var l_data = result.rows[0];
+        conn.query(sql.adDetail(),[l_data.shop_id],(err,result)=>{
+            if(err){
+              console.log(err);
+            }
+            //res.send(result.rows[0])
+            res.render('local',{data:l_data,d_data:result.rows[0]});
+        });
+      });
+    });
     return router;
 }

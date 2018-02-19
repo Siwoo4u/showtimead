@@ -34,7 +34,7 @@ html
 									span.list-item.s_title= val.shop_name
 									span.list-item.s_name= val.u_name
 									span.list-item.s_pay= val.shop_payment
-									span.list-item.s_pay= val.shop_confirm
+									span.list-item.s_confirm= val.shop_confirm
 									span.list-item= val.s_date
 									span.list-hide= val.d_file
 									span.list-hide.s_tel= val.u_tel
@@ -47,6 +47,11 @@ html
 							option(value='name') 대표자
 						input#search(type='text' onkeydown="onKeyDown();")
 						button.btn-search 검색
+						button.btn-go.display-none 샵보기
+						button.btn-local.display-none 로컬추천등록
+						div.shopinfoplace
+						input(type='hidden' id='localid')
+						input(type='hidden' id='localcon') 
 					div.mt20
 						ul
 							each val in pagination.range == '' ? [1] : pagination.range

@@ -34,8 +34,22 @@ body{
   background: #121212;
   margin-top:20px;
 }
+#titleLocal{
+  border-bottom: 1px solid #BDBDBD;
+  background: #121212;
+  margin-top:20px;
+}
 #title span{
   width:120px;
+  display: inline-block;
+  margin:10px;
+  font-weight: bold;
+  font-size: 15px;
+  text-align: center;
+  color:#fff;
+}
+#titleLocal span{
+  width:150px;
   display: inline-block;
   margin:10px;
   font-weight: bold;
@@ -56,6 +70,9 @@ body{
 }
 .s_title{
   width:200px;
+}
+.s_local{
+  width:150px;
 }
 #top{
   background: rgb(59, 25, 97);
@@ -146,6 +163,28 @@ body{
   height: 30px;
 
 }
+.btn-go{
+  background: rgb(43, 161, 193);
+  color: #ffffff;
+  padding: 5px;
+  height: 30px;
+  float: right;
+
+}
+.btn-local{
+  background: rgb(205, 46, 108);
+  color: #ffffff;
+  padding: 5px;
+  height: 30px;
+  float: right;
+  margin-right: 20px;
+}
+.shopinfoplace{
+  float: right;
+  font-size: 20px;
+  font-weight: bold;
+  margin-right: 30px;
+}
 #search{
   height: 30px;
   border: 2px solid #BDBDBD;
@@ -182,3 +221,32 @@ body{
   border:1px solid #000;
 
 }
+.block{
+  display: block;
+  margin-top:10px;
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+.local-title{
+  font-size: 25px;
+  font-weight: bold;
+  border-bottom: 1px solid black;
+  padding-bottom: 10px;
+
+}
+.fontb{
+  font-size: 20px;
+  font-weight: bold;
+}
+.keyword-bar{
+  border:1px solid black;height:30px;width:100%;margin-top:10px;
+  margin-bottom: 10px;
+}
+
+#keyword{margin-top: 7px; line-height:20px;}
+#keyframesword .tag{line-height:20px; line-height:20px; margin-right:5px;}
+#keyword .tag b{
+	background:#008CA8; display:inline-block; color:#ffffff; line-height:20px; padding:0px 5px; font-weight:normal;
+	border-radius:5px;font-size: 15px;
+}
+.delete_btn{cursor:pointer; width: 10px; margin-top:5px; border:1px solid #c8c8c8}

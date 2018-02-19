@@ -79,5 +79,44 @@ module.exports = {
                 "order by o_date desc";
     console.log("QUERY:"+query);
     return query;
+  },
+  selectShopDetail:()=>{
+    var query="select * from tm_shopinfo where shop_id= $1";
+    console.log("QUERY:"+query);
+    return query;
+  },
+  selectAD:()=>{
+    var query = "select * from tm_shop_ad where shop_id= $1";
+    console.log("QUERY:"+query);
+    return query;
+  },
+  updateAD:(rowCount)=>{
+    var query="";
+    if(rowCount==0){
+      query ="insert into tm_shop_ad (shop_id,ad_start,ad_end,ad_keyword,ad_date) "+
+                "values "+
+                "($1,to_timestamp($2,'YYYY-MM-DD HH24:MI:SS'),to_timestamp($3||' 23:59:00','YYYY-MM-DD HH24:MI:SS'),$4,now());"
+
+    }else{
+      query="update tm_shop_ad set ad_start=to_timestamp($2,'YYYY-MM-DD HH24:MI:SS'), "+
+            "ad_end=to_timestamp($3||' 23:59:00','YYYY-MM-DD HH24:MI:SS'), "+
+            "ad_keyword=$4, ad_date=now() "+
+            "where shop_id = $1";
+
+    }
+    console.log("QUERY:"+query);
+    return query;
+  },
+  selectLocalList:()=>{
+    var query ="select A.shop_id,to_char(ad_start,'YYYY-MM-DD HH24시MM분') ad_start,to_char(ad_end,'YYYY-MM-DD HH24시MM분') ad_end ,"+
+        "to_char(ad_date,'YYYY-MM-DD HH24시MM분') ad_date , shop_name,to_char(ad_end-now(),'DD일 남음')d_day "+
+        "from tm_shop_ad A, tm_shopinfo B "+
+        "where ad_end > now() and ad_start < now() and A.shop_id = B.shop_id "+
+        "order by d_day asc";
+        console.log("QUERY:"+query);
+        return query;
+  },
+  adDetail:()=>{
+    return "select to_char(ad_start,'YYYY-MM-DD') ad_start,to_char(ad_end,'YYYY-MM-DD') ad_end,ad_keyword from tm_shop_ad where shop_id = $1"
   }
 };
